@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project>
+
+  <!-- MSBuild task assembly TargetFramework-->
+  <PropertyGroup>
+    <MSBuildTaskAssemblyTargetFramework Condition="'$(MSBuildTaskAssemblyTargetFramework)' == ''">netstandard2.1</MSBuildTaskAssemblyTargetFramework>
+  </PropertyGroup>
+
+  <!-- Path to MSBuild task assembly -->
+  <PropertyGroup>
+    <MSBuildTaskAssembly>$(MSBuildThisFileDirectory)MSBuildTaskSample\bin\Debug\$(MSBuildTaskAssemblyTargetFramework)\publish\MSBuildTaskSample.dll</MSBuildTaskAssembly>
+  </PropertyGroup>
+
+  <!-- Import MSBuild task from assembly -->
+  <UsingTask TaskName="TaskExample" AssemblyFile="$(MSBuildTaskAssembly)" />
+
+  <!-- Run task from assembly -->
+  <Target Name="Example">
+
+    <TaskExample TenantId="$(TenantId)"
+                 TeamId="$(TeamId)"
+                 ChannelId="$(ChannelId)"
+                 ClientId="$(ClientId)"
+                 Login="$(Login)"
+                 Password="$(Password)"
+                 />
+  </Target>
+
+</Project>
